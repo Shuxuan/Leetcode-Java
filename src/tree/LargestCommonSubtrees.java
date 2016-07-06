@@ -23,16 +23,16 @@ public class LargestCommonSubtrees {
          *           \         \
          *            7         10
          * */
-        TreeNode r1 = new TreeNode(1, new ArrayList<TreeNode>());
-        TreeNode r2 = new TreeNode(2, new ArrayList<TreeNode>());
-        TreeNode r3 = new TreeNode(3, new ArrayList<TreeNode>());
-        TreeNode r4 = new TreeNode(4, new ArrayList<TreeNode>());
-        TreeNode r5 = new TreeNode(5, new ArrayList<TreeNode>());
-        TreeNode r6 = new TreeNode(6, new ArrayList<TreeNode>());
-        TreeNode r7 = new TreeNode(7, new ArrayList<TreeNode>());
-        TreeNode r8 = new TreeNode(8, new ArrayList<TreeNode>());
-        TreeNode r9 = new TreeNode(9, new ArrayList<TreeNode>());
-        TreeNode r10 = new TreeNode(10, new ArrayList<TreeNode>());
+        TreeNodeMultiChildren r1 = new TreeNodeMultiChildren(1, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r2 = new TreeNodeMultiChildren(2, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r3 = new TreeNodeMultiChildren(3, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r4 = new TreeNodeMultiChildren(4, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r5 = new TreeNodeMultiChildren(5, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r6 = new TreeNodeMultiChildren(6, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r7 = new TreeNodeMultiChildren(7, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r8 = new TreeNodeMultiChildren(8, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r9 = new TreeNodeMultiChildren(9, new ArrayList<TreeNodeMultiChildren>());
+        TreeNodeMultiChildren r10 = new TreeNodeMultiChildren(10, new ArrayList<TreeNodeMultiChildren>());
 /*
         r1.subNodes.add(r2);
         r1.subNodes.add(r3);
@@ -61,30 +61,30 @@ public class LargestCommonSubtrees {
         r4.subNodes.add(r9);
         r4.subNodes.add(r10);
 
-        ArrayList<ArrayList<TreeNode>> ret = largestCommonSubtrees(r1);
-        for (ArrayList<TreeNode> arrayl: ret) {
-            for (TreeNode t: arrayl) {
+        ArrayList<ArrayList<TreeNodeMultiChildren>> ret = largestCommonSubtrees(r1);
+        for (ArrayList<TreeNodeMultiChildren> arrayl: ret) {
+            for (TreeNodeMultiChildren t: arrayl) {
                 System.out.println(t.val);
             }
         }
 
     }
 
-    public static ArrayList<ArrayList<TreeNode>> largestCommonSubtrees(TreeNode root) {
+    public static ArrayList<ArrayList<TreeNodeMultiChildren>> largestCommonSubtrees(TreeNodeMultiChildren root) {
         if (root == null) {
             return null;
         }
 
         // store all the tree nodes to a arrayList.
-        ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
+        ArrayList<TreeNodeMultiChildren> nodes = new ArrayList<TreeNodeMultiChildren>();
         traversalTree(root, nodes);
 
         int maxNum = 0;
 
         HashMap<Integer, Integer> hash = new HashMap<Integer, Integer>();
 
-        TreeNode r1 = null;
-        TreeNode r2 = null;
+        TreeNodeMultiChildren r1 = null;
+        TreeNodeMultiChildren r2 = null;
 
 
         // compare all the nodes.
@@ -101,8 +101,8 @@ public class LargestCommonSubtrees {
             }
         }
 
-        ArrayList<ArrayList<TreeNode>> retNew = new ArrayList<ArrayList<TreeNode>>();
-        retNew.add(new ArrayList<TreeNode>());
+        ArrayList<ArrayList<TreeNodeMultiChildren>> retNew = new ArrayList<ArrayList<TreeNodeMultiChildren>>();
+        retNew.add(new ArrayList<TreeNodeMultiChildren>());
         retNew.get(0).add(r1);
         retNew.get(0).add(r2);
         return retNew;
@@ -110,7 +110,7 @@ public class LargestCommonSubtrees {
 
 
     // compare two tree, if same, return the number of leafs. if no, return -1;
-    public static int compareTree(TreeNode r1, TreeNode r2, HashMap<Integer, Integer> hash) {
+    public static int compareTree(TreeNodeMultiChildren r1, TreeNodeMultiChildren r2, HashMap<Integer, Integer> hash) {
         if (r1 == null && r2 == null) {
             return 0;
         }
@@ -128,8 +128,8 @@ public class LargestCommonSubtrees {
 
         for (int i = 0; i < r1.subNodes.size(); i++) {
             // get the subNode of r1.
-            TreeNode subNode1 = r1.subNodes.get(i);
-            TreeNode subNode2 = r2.subNodes.get(i);
+            TreeNodeMultiChildren subNode1 = r1.subNodes.get(i);
+            TreeNodeMultiChildren subNode2 = r2.subNodes.get(i);
 
             int HashCode = hashCode(subNode1, subNode2);
 
@@ -155,12 +155,12 @@ public class LargestCommonSubtrees {
         return num;
     }
 
-    public static int hashCode(TreeNode r1, TreeNode r2) {
+    public static int hashCode(TreeNodeMultiChildren r1, TreeNodeMultiChildren r2) {
         int hash = r1.hashCode() * 31 + r2.hashCode();
         return hash;
     }
 
-    public static void traversalTree(TreeNode root, ArrayList<TreeNode> ret) {
+    public static void traversalTree(TreeNodeMultiChildren root, ArrayList<TreeNodeMultiChildren> ret) {
         if (root == null) {
             return;
         }
@@ -169,7 +169,7 @@ public class LargestCommonSubtrees {
 
         // add all the sub nodes.
         if (root.subNodes != null) {
-            for(TreeNode t: root.subNodes) {
+            for(TreeNodeMultiChildren t: root.subNodes) {
                 traversalTree(t, ret);
             }
         }
